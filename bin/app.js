@@ -30,6 +30,8 @@ if (argv.help) {
 }
 
 let  recorded_flag= false;
+var bucket   = process.env.BUCKEt;
+
 const config = {
   rtmp: {
     port: 1935,
@@ -129,7 +131,7 @@ nms.on('doneConnect', (id, args) => {
   console.log(files[0])
 
   if (!recorded_flag){
-    uploadFileToS3("mp4-venditi", files[0], path.join(files_path,files[0]))
+    uploadFileToS3(bucket, files[0], path.join(files_path,files[0]))
     .then(data => {
       console.log('File uploaded successfully:', data);
       recorded_flag=true;
